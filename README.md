@@ -36,7 +36,9 @@ Users can enter a keyword and get a responsive grid of images related to their s
 ## 📷 Usage
 
 Enter a keyword (e.g., "mountains", "cars") in the search bar.
+
 Click search or press enter.
+
 Browse images fetched from Unsplash.
 
 ## 📂 Project Structure
