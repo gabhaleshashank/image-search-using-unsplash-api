@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;800;900&display=swap');
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
 }
 
-body{
+body {
     line-height: 1.6;
     background-image: url(images/69.jpg);
     background-size: cover;
@@ -15,21 +15,21 @@ body{
     background-attachment: fixed;
 }
 
-h1{
+h1 {
     font-size: 36px;
     font-weight: bold;
     text-align: center;
     margin: 40px 0 60px 0;
 }
 
-form{
+form {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 60px;
 }
 
-#search-input{
+#search-input {
     width: 60%;
     max-width: 400px;
     padding: 10px 20px;
@@ -40,7 +40,7 @@ form{
     color: #333;
 }
 
-#search-button{
+#search-button {
     padding: 10px 20px;
     background-color: #138065;
     color: #fff;
@@ -52,39 +52,37 @@ form{
     margin-left: 10px;
 }
 
-.search-results{
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+/* Masonry Layout - like Unsplash */
+.search-results {
+    column-count: 4;
+    column-gap: 16px;
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 10px;
 }
 
-.search-result{
-    margin-bottom: 60px;
-    height: 100%;
-    width: 15%;
+.search-result {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 16px;
     border-radius: 5px;
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
     overflow: hidden;
+    background: #fff;
 }
 
-.search-result img{
-    height: 100%;
+.search-result img {
     width: 100%;
-    object-fit: cover;
+    height: auto; /* Keep natural aspect ratio */
+    display: block;
     transition: opacity 0.2s ease-in-out;
 }
 
-.search-result:hover img{
+.search-result:hover img {
     opacity: 0.8;
-    height: 200px; /* Set a fixed height for the images */
-    width: 100%;
-    object-fit: cover;
-    transition: opacity 0.2s ease-in-out;
 }
 
-.search-result a{
+.search-result a {
     font-size: 15px;
     text-decoration: none;
     color: #333;
@@ -93,7 +91,7 @@ form{
     text-transform: capitalize;
 }
 
-#show-more-button{
+#show-more-button {
     background-color: #008cba;
     font-size: 18px;
     border: none;
@@ -108,7 +106,7 @@ form{
 }
 
 .bottom-bar {
-    background-color:  rgba(51, 51, 51, 0.8);
+    background-color: rgba(51, 51, 51, 0.8);
     color: #fff;
     text-align: center;
     padding: 10px 0;
@@ -119,17 +117,35 @@ form{
     font-size: 14px;
 }
 
-@media screen and (max-width: 768px) {
-    .search-results{
-        padding: 20px;
-    }
-    .search-result{
-        width: 45%;
+/* Responsive column changes */
+@media screen and (max-width: 1024px) {
+    .search-results {
+        column-count: 3;
     }
 }
 
-@media screen and (max-width: 480px){
-    .search-result{
-        width: 100%;
+@media screen and (max-width: 768px) {
+    .search-results {
+        column-count: 2;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .search-results {
+        column-count: 1;
+    }
+}
+
+/* Smooth fade-in for each image card */
+.search-result {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
