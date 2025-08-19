@@ -53,9 +53,11 @@ Browse images fetched from Unsplash.
 ## ⚠️ Notes
 
 The Unsplash API has a free limit of 50 requests per hour.
+
 Ensure your API key is kept safe and not exposed in public repos.
 
 ## 📜 License
 
 This project is licensed under the MIT License.
+
 Images are provided by Unsplash under their API Guidelines.
