@@ -11,6 +11,14 @@ let page = 1;
 let loading = false;
 let fetchedImages = [];
 
+// Modal elements
+const modal = document.getElementById("image-modal");
+const modalImg = document.getElementById("modal-img");
+const closeBtn = document.querySelector(".close");
+const downloadSmall = document.getElementById("download-small");
+const downloadRegular = document.getElementById("download-regular");
+const downloadFull = document.getElementById("download-full");
+
 // Masonry fix function
 function resizeMasonryItem(item) {
     const grid = document.querySelector('.search-results');
@@ -62,6 +70,9 @@ async function searchImages(reset = false) {
                 const image = document.createElement("img");
                 image.src = result.urls.small;
                 image.alt = result.alt_description || "Unsplash image";
+                image.dataset.small = result.urls.small;
+                image.dataset.regular = result.urls.regular;
+                image.dataset.full = result.urls.full;
 
                 image.onload = () => resizeMasonryItem(imageWrapper);
 
@@ -73,6 +84,11 @@ async function searchImages(reset = false) {
                 imageWrapper.appendChild(image);
                 imageWrapper.appendChild(imageLink);
                 searchResults.appendChild(imageWrapper);
+
+                // Image click event -> open modal
+                image.addEventListener("click", () => {
+                    openModal(image);
+                });
             }
         });
 
@@ -84,6 +100,20 @@ async function searchImages(reset = false) {
         loading = false;
     }
 }
+
+function openModal(img) {
+    modal.style.display = "block";
+    modalImg.src = img.dataset.full;
+
+    // Update download links
+    downloadSmall.href = img.dataset.small;
+    downloadRegular.href = img.dataset.regular;
+    downloadFull.href = img.dataset.full;
+}
+
+// Close modal
+closeBtn.onclick = () => { modal.style.display = "none"; };
+window.onclick = (e) => { if (e.target === modal) modal.style.display = "none"; };
 
 // Handle search form submit
 formEl.addEventListener("submit", (event) => {
