@@ -51,7 +51,6 @@ async function searchImages(reset = false, pushState = true) {
         fetchedImages = [];
         searchResults.innerHTML = "";
         if (pushState) {
-            // Push new state to browser history
             history.pushState({ search: inputData, page: 1, results: [] }, "", `?search=${encodeURIComponent(inputData)}`);
         }
     }
@@ -90,14 +89,11 @@ async function searchImages(reset = false, pushState = true) {
                 searchResults.appendChild(imageWrapper);
 
                 // Image click event -> open modal
-                image.addEventListener("click", () => {
-                    openModal(image);
-                });
+                image.addEventListener("click", () => openModal(image));
             }
         });
 
         page++;
-        // Replace state to save current results
         if (pushState) {
             history.replaceState({ search: inputData, page: page, results: fetchedImages }, "", `?search=${encodeURIComponent(inputData)}`);
         }
@@ -109,19 +105,39 @@ async function searchImages(reset = false, pushState = true) {
     }
 }
 
-// Open modal
+// Open modal with smooth transition
 function openModal(img) {
     modal.style.display = "block";
+    modal.style.opacity = 0;
+
+    // Force reflow for transition
+    requestAnimationFrame(() => {
+        modal.style.transition = "opacity 0.3s ease";
+        modal.style.opacity = 1;
+    });
+
     modalImg.src = img.dataset.full;
 
-    downloadSmall.href = img.dataset.small;
-    downloadRegular.href = img.dataset.regular;
-    downloadFull.href = img.dataset.full;
+    // Update download links to open in new tab without affecting history
+    [downloadSmall, downloadRegular, downloadFull].forEach((link, index) => {
+        const sizes = [img.dataset.small, img.dataset.regular, img.dataset.full];
+        link.href = sizes[index];
+        link.target = "_blank";  // open in new tab
+        link.setAttribute("download", ""); // force download
+    });
 }
 
-// Close modal
-closeBtn.onclick = () => { modal.style.display = "none"; };
-window.onclick = (e) => { if (e.target === modal) modal.style.display = "none"; };
+// Close modal smoothly
+function closeModal() {
+    modal.style.transition = "opacity 0.3s ease";
+    modal.style.opacity = 0;
+    setTimeout(() => {
+        modal.style.display = "none";
+    }, 300);
+}
+
+closeBtn.onclick = closeModal;
+window.onclick = (e) => { if (e.target === modal) closeModal(); };
 
 // Handle search form submit
 formEl.addEventListener("submit", (event) => {
@@ -176,7 +192,6 @@ window.addEventListener("popstate", (event) => {
             image.addEventListener("click", () => openModal(image));
         });
     } else {
-        // No state: show demo images
         demoImages.style.display = "block";
         searchResults.innerHTML = "";
         fetchedImages = [];
