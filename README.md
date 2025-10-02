@@ -48,12 +48,14 @@ Users can enter a keyword and get a responsive grid of images related to their s
 6. Right-click on the image to save it.
 
 ## 📂 Project Structure
+```
 ├── background-image.jpg
 ├── LICENSE
 ├── index.html
 ├── style.css
 ├── script.js
 └── README.md
+```
 
 ## ⚠️ Notes
 
