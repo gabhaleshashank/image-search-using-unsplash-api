@@ -32,7 +32,7 @@ function resizeMasonryItem(item) {
     }
 }
 
-async function searchImages(reset = false) {
+async function searchImages(reset = false, pushState = true) {
     if (loading) return;
     loading = true;
 
@@ -50,6 +50,10 @@ async function searchImages(reset = false) {
     if (reset) {
         fetchedImages = [];
         searchResults.innerHTML = "";
+        if (pushState) {
+            // Push new state to browser history
+            history.pushState({ search: inputData, page: 1, results: [] }, "", `?search=${encodeURIComponent(inputData)}`);
+        }
     }
 
     const url = `https://api.unsplash.com/search/photos?page=${page}&query=${inputData}&per_page=12&client_id=${accessKey}`;
@@ -93,6 +97,10 @@ async function searchImages(reset = false) {
         });
 
         page++;
+        // Replace state to save current results
+        if (pushState) {
+            history.replaceState({ search: inputData, page: page, results: fetchedImages }, "", `?search=${encodeURIComponent(inputData)}`);
+        }
     } catch (error) {
         console.error("Error fetching images:", error);
         alert("Failed to fetch images. Check console for details.");
@@ -101,11 +109,11 @@ async function searchImages(reset = false) {
     }
 }
 
+// Open modal
 function openModal(img) {
     modal.style.display = "block";
     modalImg.src = img.dataset.full;
 
-    // Update download links
     downloadSmall.href = img.dataset.small;
     downloadRegular.href = img.dataset.regular;
     downloadFull.href = img.dataset.full;
@@ -130,5 +138,48 @@ window.addEventListener("scroll", () => {
         inputEl.value.trim() !== ""
     ) {
         searchImages();
+    }
+});
+
+// Handle browser back/forward
+window.addEventListener("popstate", (event) => {
+    const state = event.state;
+    if (state && state.search) {
+        inputEl.value = state.search;
+        fetchedImages = state.results || [];
+        searchResults.innerHTML = "";
+        demoImages.style.display = "none";
+
+        // Re-render images
+        fetchedImages.forEach(result => {
+            const imageWrapper = document.createElement("div");
+            imageWrapper.classList.add("search-result");
+
+            const image = document.createElement("img");
+            image.src = result.urls.small;
+            image.alt = result.alt_description || "Unsplash image";
+            image.dataset.small = result.urls.small;
+            image.dataset.regular = result.urls.regular;
+            image.dataset.full = result.urls.full;
+
+            image.onload = () => resizeMasonryItem(imageWrapper);
+
+            const imageLink = document.createElement("a");
+            imageLink.href = result.links.html;
+            imageLink.target = "_blank";
+            imageLink.textContent = result.alt_description || "View Image";
+
+            imageWrapper.appendChild(image);
+            imageWrapper.appendChild(imageLink);
+            searchResults.appendChild(imageWrapper);
+
+            image.addEventListener("click", () => openModal(image));
+        });
+    } else {
+        // No state: show demo images
+        demoImages.style.display = "block";
+        searchResults.innerHTML = "";
+        fetchedImages = [];
+        page = 1;
     }
 });
