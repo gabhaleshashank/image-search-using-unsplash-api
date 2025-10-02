@@ -1,45 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Search With JavaScript API</title>
+    <title>Image Search With Unsplash API</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-    
-    <h1>Image Search Using API</h1> <!-- Title -->
 
-    <form action=""> <!-- Search Bar and Button -->
+<body>
+    <!-- Title -->
+    <h1>Image Search using Unsplash API</h1>
+
+    <!-- Search Bar and Button -->
+    <form action="">
         <input type="text" id="search-input" placeholder="Search for Images" autocomplete="off">
         <button id="search-button">Search</button>
     </form>
 
+    <!-- Demo Images Section -->
+    <div class="demo-images">
+        <div class="search-result">
+            <img src="https://images.unsplash.com/photo-1689613188426-130b2d01c9ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=60"
+                alt="Train Station">
+            <a href="https://unsplash.com/photos/a-train-station-with-two-trains-parked-inside-of-it-lU-9XF7Prt0"
+                target="_blank">
+                Train Station With Two Trains Parked Inside Of It
+            </a>
+        </div>
+        <div class="search-result">
+            <img src="https://images.unsplash.com/photo-1689613188426-130b2d01c9ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=60"
+                alt="Train Station">
+            <a href="https://unsplash.com/photos/a-train-station-with-two-trains-parked-inside-of-it-lU-9XF7Prt0"
+                target="_blank">
+                Train Station With Two Trains Parked Inside Of It
+            </a>
+        </div>
+        <div class="search-result">
+            <img src="https://images.unsplash.com/photo-1689613188426-130b2d01c9ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=60"
+                alt="Train Station">
+            <a href="https://unsplash.com/photos/a-train-station-with-two-trains-parked-inside-of-it-lU-9XF7Prt0"
+                target="_blank">
+                Train Station With Two Trains Parked Inside Of It
+            </a>
+        </div>
+    </div>
+
+    <!-- Search Results Section -->
     <div class="search-results">
-        <div class="search-result"> <!-- Target Image 1 -->
-            <img src="https://images.unsplash.com/photo-1689613188426-130b2d01c9ca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=60" alt="Train Station">
-            <a href="https://unsplash.com/photos/a-train-station-with-two-trains-parked-inside-of-it-lU-9XF7Prt0" target="_blank">A Train Station With Two Trains Parked Inside Of It</a>
-        </div>
-
-        <div class="search-result"> <!-- Target Image 2 -->
-            <img src="https://images.unsplash.com/photo-1689613188426-130b2d01c9ca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=60" alt="Train Station">
-            <a href="https://unsplash.com/photos/a-train-station-with-two-trains-parked-inside-of-it-lU-9XF7Prt0" target="_blank">A Train Station With Two Trains Parked Inside Of It</a>
-        </div>
-
-        <div class="search-result"> <!-- Target Image 3 -->
-            <img src="https://images.unsplash.com/photo-1689613188426-130b2d01c9ca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=60" alt="Train Station">
-            <a href="https://unsplash.com/photos/a-train-station-with-two-trains-parked-inside-of-it-lU-9XF7Prt0" target="_blank">A Train Station With Two Trains Parked Inside Of It</a>
-        </div>
+        <!-- New searched images will appear here -->
     </div>
 
     <button id="show-more-button">Show More</button>
 
-    <!-- Bottom Bar with Copyright Notice -->
+    <!-- Bottom Bar with Copyright-->
     <div class="bottom-bar">
-        <p>&copy; Shashank. Image Search Using API.</p>
+        <p>&copy; Shashank. Image Search using Unsplash API.</p>
     </div>
-
 
     <script src="script.js"></script> <!-- JavaScript -->
 </body>
+
 </html>
