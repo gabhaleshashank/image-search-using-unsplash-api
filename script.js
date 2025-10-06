@@ -59,7 +59,10 @@ async function searchImages(reset = false, pushState = true) {
 
     try {
         const response = await fetch(url);
-        if (!response.ok) throw new Error("API request failed");
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`API request failed with status ${response.status}: ${errorText}`);
+        }
         const data = await response.json();
         const results = data.results;
 
