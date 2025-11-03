@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Search With Unsplash API</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Title -->
+    <h1>Image Search using Unsplash API</h1>
+
+    <!-- Search Bar and Button -->
+    <form action="">
+        <input type="text" id="search-input" placeholder="Search for Images" autocomplete="off">
+        <button id="search-button">Search</button>
+    </form>
+
+    <!-- Demo Images Section -->
+    <div class="demo-images">
+        <div class="search-result">
+            <img src="https://images.unsplash.com/photo-1689613188426-130b2d01c9ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=60"
+                alt="Train Station">
+            <a href="https://unsplash.com/photos/a-train-station-with-two-trains-parked-inside-of-it-lU-9XF7Prt0"
+                target="_blank">
+                Train Station With Two Trains Parked Inside Of It
+            </a>
+        </div>
+        <div class="search-result">
+            <img src="https://images.unsplash.com/photo-1689613188426-130b2d01c9ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=60"
+                alt="Train Station">
+            <a href="https://unsplash.com/photos/a-train-station-with-two-trains-parked-inside-of-it-lU-9XF7Prt0"
+                target="_blank">
+                Train Station With Two Trains Parked Inside Of It
+            </a>
+        </div>
+        <div class="search-result">
+            <img src="https://images.unsplash.com/photo-1689613188426-130b2d01c9ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=60"
+                alt="Train Station">
+            <a href="https://unsplash.com/photos/a-train-station-with-two-trains-parked-inside-of-it-lU-9XF7Prt0"
+                target="_blank">
+                Train Station With Two Trains Parked Inside Of It
+            </a>
+        </div>
+    </div>
+
+    <!-- Search Results Section -->
+    <div class="search-results">
+        <!-- New searched images will appear here -->
+    </div>
+
+    <button id="show-more-button">Show More</button>
+
+    <!-- Modal for image preview and download -->
+    <div id="image-modal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modal-img" src="">
+        <div class="download-options">
+            <a id="download-small" href="#" download>Small</a>
+            <a id="download-regular" href="#" download>Medium</a>
+            <a id="download-full" href="#" download>Large</a>
+        </div>
+    </div>
+
+    <!-- Bottom Bar with Copyright-->
+    <div class="bottom-bar">
+        <p>&copy; Shashank. Image Search using Unsplash API.</p>
+    </div>
+
+    <script src="script.js"></script> <!-- JavaScript -->
+</body>
+
+</html>
