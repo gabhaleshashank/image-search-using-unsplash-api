@@ -1,4 +1,3 @@
-// access key = "1PnPHAtv9aRZhKca-tlq2tU-xlA2sI_WE12e0uT-LvQ";
 const accessKey = "1PnPHAtv9aRZhKca-tlq2tU-xlA2sI_WE12e0uT-LvQ";
 
 const formEl = document.querySelector("form");
@@ -11,7 +10,7 @@ let page = 1;
 let loading = false;
 let fetchedImages = [];
 
-// Modal elements
+//modal elements
 const modal = document.getElementById("image-modal");
 const modalImg = document.getElementById("modal-img");
 const closeBtn = document.querySelector(".close");
@@ -19,7 +18,7 @@ const downloadSmall = document.getElementById("download-small");
 const downloadRegular = document.getElementById("download-regular");
 const downloadFull = document.getElementById("download-full");
 
-// Masonry fix function
+//masonry fix function
 function resizeMasonryItem(item) {
     const grid = document.querySelector('.search-results');
     const rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
@@ -91,7 +90,7 @@ async function searchImages(reset = false, pushState = true) {
                 imageWrapper.appendChild(imageLink);
                 searchResults.appendChild(imageWrapper);
 
-                // Image click event -> open modal
+                //image click event -> open modal
                 image.addEventListener("click", () => openModal(image));
             }
         });
@@ -108,12 +107,12 @@ async function searchImages(reset = false, pushState = true) {
     }
 }
 
-// Open modal with smooth transition
+//open modal with smooth transition
 function openModal(img) {
     modal.style.display = "block";
     modal.style.opacity = 0;
 
-    // Force reflow for transition
+    //force reflow for transition
     requestAnimationFrame(() => {
         modal.style.transition = "opacity 0.3s ease";
         modal.style.opacity = 1;
@@ -121,16 +120,16 @@ function openModal(img) {
 
     modalImg.src = img.dataset.full;
 
-    // Update download links to open in new tab without affecting history
+    //update download links to open in new tab without affecting history
     [downloadSmall, downloadRegular, downloadFull].forEach((link, index) => {
         const sizes = [img.dataset.small, img.dataset.regular, img.dataset.full];
         link.href = sizes[index];
-        link.target = "_blank";  // open in new tab
-        link.setAttribute("download", ""); // force download
+        link.target = "_blank";  //open in new tab
+        link.setAttribute("download", ""); //force download
     });
 }
 
-// Close modal smoothly
+//close modal smoothly
 function closeModal() {
     modal.style.transition = "opacity 0.3s ease";
     modal.style.opacity = 0;
@@ -142,14 +141,14 @@ function closeModal() {
 closeBtn.onclick = closeModal;
 window.onclick = (e) => { if (e.target === modal) closeModal(); };
 
-// Handle search form submit
+//handle search form submit
 formEl.addEventListener("submit", (event) => {
     event.preventDefault();
     page = 1;
     searchImages(true);
 });
 
-// Infinite scroll listener
+//infinite scroll listener
 window.addEventListener("scroll", () => {
     if (
         window.innerHeight + window.scrollY >= document.body.offsetHeight - 300 &&
@@ -160,7 +159,7 @@ window.addEventListener("scroll", () => {
     }
 });
 
-// Handle browser back/forward
+//handle browser back/forward
 window.addEventListener("popstate", (event) => {
     const state = event.state;
     if (state && state.search) {
@@ -169,7 +168,7 @@ window.addEventListener("popstate", (event) => {
         searchResults.innerHTML = "";
         demoImages.style.display = "none";
 
-        // Re-render images
+        //re-render images
         fetchedImages.forEach(result => {
             const imageWrapper = document.createElement("div");
             imageWrapper.classList.add("search-result");
